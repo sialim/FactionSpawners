@@ -16,9 +16,9 @@ public class FactionCommand implements TabExecutor {
         this.plugin = plugin;
         factionManager = plugin.factionManager;
         registerSubCommand(new FactionCreateCommand(this));
+        registerSubCommand(new FactionInviteCommand(this));
+        registerSubCommand(new FactionInvitesCommand(this));
         //registerSubCommand(new FactionDeleteCommand());
-        //registerSubCommand(new FactionInviteCommand());
-        //registerSubCommand(new FactionInvitesCommand());
         //registerSubCommand(new FactionRemoveCommand());
         //registerSubCommand(new FactionAdminCommand());
         //registerSubCommand(new FactionUnadminCommand());

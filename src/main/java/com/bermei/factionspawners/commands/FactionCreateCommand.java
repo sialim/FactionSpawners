@@ -3,6 +3,7 @@ package com.bermei.factionspawners.commands;
 import com.bermei.factionspawners.FactionSpawners;
 import com.bermei.factionspawners.factions.Faction;
 import com.bermei.factionspawners.utilities.ActionBarMessages;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
@@ -37,19 +38,19 @@ public class FactionCreateCommand implements SubCommand {
         }
 
         if (commandManager.factionManager.getFactionByMember(p.getUniqueId()) != null) {
-            util.actionBar(p, "already in faction");
+            util.actionBar(p, "already in faction", ChatColor.RED);
             return;
         }
 
         String name = args[0];
         if (commandManager.factionManager.getFaction(name) != null) {
-            util.actionBar(p, "faction already exists");
+            util.actionBar(p, "faction already exists", ChatColor.RED);
             return;
         }
 
         Faction faction = new Faction(name, p.getUniqueId());
         commandManager.factionManager.addFaction(faction);
-        util.actionBar(p, "faction " + name + " created");
+        util.actionBar(p, "faction " + name + " created", ChatColor.GREEN);
     }
 
     @Override
