@@ -46,6 +46,7 @@ public class FactionInviteCommand implements SubCommand {
         Player t = Bukkit.getPlayer(args[0]);
         if (t == null) {
             util.actionBar(p, "player invalid or offline", ChatColor.RED);
+            return;
         }
 
         UUID tUUID = t.getUniqueId();
