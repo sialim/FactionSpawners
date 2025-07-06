@@ -6,6 +6,7 @@ import com.bermei.factionspawners.utilities.ActionBarMessages;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -51,7 +52,7 @@ public class FactionCreateCommand implements SubCommand {
         Faction faction = new Faction(name, p.getUniqueId());
         commandManager.factionManager.addFaction(faction);
         commandManager.factionManager.saveFactions();
-        util.actionBar(p, "faction " + name + " created", ChatColor.GREEN);
+        Bukkit.getOnlinePlayers().forEach(plr -> util.actionBar(plr, "faction " + name + " created", ChatColor.GREEN));
     }
 
     @Override

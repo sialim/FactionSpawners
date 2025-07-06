@@ -64,6 +64,7 @@ public class FactionUnadminCommand implements SubCommand{
         faction.removeAdmin(tUUID);
         commandManager.factionManager.saveFactions();
         util.actionBar(p, t.getName() + " is no longer a faction admin");
+        util.actionBar(t, "you are no longer a faction admin");
     }
 
     @Override

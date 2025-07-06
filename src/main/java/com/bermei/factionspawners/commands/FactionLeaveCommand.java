@@ -3,9 +3,11 @@ package com.bermei.factionspawners.commands;
 import com.bermei.factionspawners.factions.Faction;
 import com.bermei.factionspawners.utilities.ActionBarMessages;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
 import java.util.UUID;
 import java.util.Collections;
 import java.util.List;
@@ -43,6 +45,11 @@ public class FactionLeaveCommand implements SubCommand{
 
         faction.removeMember(pUUID);
         commandManager.factionManager.saveFactions();
+        faction.members.stream()
+                .map(Bukkit::getPlayer)
+                .filter(Objects::nonNull)
+                .forEach(plr -> util.actionBar(plr,
+                        p.getName() + " has left the faction"));
         util.actionBar(p, "left " + faction.name);
     }
 

@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,11 @@ public class FactionRemoveCommand implements SubCommand{
             return;
         }
 
+        else if (tUUID.equals(pUUID)) {
+            util.actionBar(p, "cannot remove yourself", ChatColor.RED);
+            return;
+        }
+
         else if (tUUID.equals(faction.owner)) {
             util.actionBar(p, "cannot remove faction owner", ChatColor.RED);
             return;
@@ -69,6 +75,11 @@ public class FactionRemoveCommand implements SubCommand{
 
         faction.removeMember(tUUID);
         commandManager.factionManager.saveFactions();
+        faction.members.stream()
+                .map(Bukkit::getPlayer)
+                .filter(Objects::nonNull)
+                .forEach(plr -> util.actionBar(plr,
+                        p.getName() + " has been removed from the faction"));
         util.actionBar(p, "removed " + t.getName(), ChatColor.GREEN);
     }
 

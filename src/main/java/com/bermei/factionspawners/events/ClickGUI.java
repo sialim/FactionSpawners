@@ -4,12 +4,15 @@ import com.bermei.factionspawners.FactionSpawners;
 import com.bermei.factionspawners.factions.Faction;
 import com.bermei.factionspawners.gui.InviteResponseGUI;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Objects;
 
 public class ClickGUI implements Listener {
     FactionSpawners plugin;
@@ -34,9 +37,16 @@ public class ClickGUI implements Listener {
             if (clicked.getItemMeta().getDisplayName().equals("join")) {
                 Faction faction1 = plugin.factionManager.getFaction(faction);
                 if (faction1 != null) {
+                    faction1.members.stream()
+                            .map(Bukkit::getPlayer)
+                            .filter(Objects::nonNull)
+                            .forEach(plr -> plugin.util.actionBar(plr,
+                                    p.getName() + " has joined the faction"));
+
                     faction1.addMember(p.getUniqueId());
                     plugin.invites.removeInvite(p.getUniqueId(), faction);
                     p.closeInventory();
+
                     plugin.util.actionBar(p, "joined " + faction, ChatColor.GREEN);
                 }
             }

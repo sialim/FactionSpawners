@@ -64,6 +64,7 @@ public class FactionAdminCommand implements SubCommand{
         faction.addAdmin(tUUID);
         commandManager.factionManager.saveFactions();
         util.actionBar(p, t.getName() + " is now admin");
+        util.actionBar(t, "you are now a faction admin");
     }
 
     @Override

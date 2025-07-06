@@ -3,11 +3,13 @@ package com.bermei.factionspawners.commands;
 import com.bermei.factionspawners.factions.Faction;
 import com.bermei.factionspawners.utilities.ActionBarMessages;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class FactionDeleteCommand implements SubCommand {
     private final FactionCommand commandManager;
@@ -40,6 +42,11 @@ public class FactionDeleteCommand implements SubCommand {
             return;
         }
 
+        faction.members.stream()
+                .filter(uuid -> !uuid.equals(faction.owner))
+                .map(Bukkit::getPlayer)
+                .filter(Objects::nonNull)
+                .forEach(plr -> util.actionBar(plr, faction.name + " has been deleted", ChatColor.YELLOW));
         commandManager.factionManager.removeFaction(faction.name);
         util.actionBar(p, "faction deleted", ChatColor.GREEN);
     }
