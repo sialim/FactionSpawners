@@ -1,6 +1,12 @@
 name: FactionSpawners
 version: '${project.version}'
 main: com.bermei.factionspawners.FactionSpawners
+dependencies:
+  server:
+    NBTAPI:
+      load: BEFORE
+      required: true
+      join-classpath: true
 commands:
   f:
     description: Faction command

@@ -6,6 +6,7 @@ import com.bermei.factionspawners.events.ClickGUI;
 import com.bermei.factionspawners.events.JoinMessageModifier;
 import com.bermei.factionspawners.events.ProtectionListener;
 import com.bermei.factionspawners.factions.FactionManager;
+import com.bermei.factionspawners.factions.SpawnerManager;
 import com.bermei.factionspawners.utilities.ActionBarMessages;
 import com.bermei.factionspawners.utilities.InviteStorage;
 import org.bukkit.Bukkit;
@@ -20,6 +21,7 @@ public final class FactionSpawners extends JavaPlugin {
     public ClickGUI clickListener;
     public ProtectionListener protectionListener;
     public JoinMessageModifier joinMessageModifier;
+    public SpawnerManager spawnerManager;
 
     @Override
     public void onEnable() {
@@ -31,6 +33,7 @@ public final class FactionSpawners extends JavaPlugin {
         clickListener = new ClickGUI(this);
         protectionListener = new ProtectionListener();
         joinMessageModifier = new JoinMessageModifier(this);
+        spawnerManager = new SpawnerManager(this);
 
         getCommand("f").setExecutor(factionCommand);
         getCommand("f").setTabCompleter(factionCommand);
@@ -39,6 +42,7 @@ public final class FactionSpawners extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(clickListener, this);
         Bukkit.getPluginManager().registerEvents(protectionListener, this);
         Bukkit.getPluginManager().registerEvents(joinMessageModifier, this);
+        Bukkit.getPluginManager().registerEvents(spawnerManager, this);
 
         saveDefaultConfig();
     }
@@ -46,5 +50,6 @@ public final class FactionSpawners extends JavaPlugin {
     @Override
     public void onDisable() {
         factionManager.saveFactions();
+        spawnerManager.saveSpawners();
     }
 }
