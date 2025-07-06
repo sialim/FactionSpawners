@@ -32,13 +32,18 @@ public class ProtectionListener implements Listener {
 
     @EventHandler public void onBlockPlace(BlockPlaceEvent e) {
         Chunk chunk = e.getBlock().getChunk();
-        e.setCancelled(chunk.getX() == 0 && chunk.getZ() == 0 && !e.getPlayer().isOp());
+        if (chunk.getX() == 0 && chunk.getZ() == 0 && !e.getPlayer().isOp()) {
+            e.setCancelled(true);
+            e.setBuild(false);
+        }
     }
 
     @EventHandler public void onEntityDamage(EntityDamageEvent e) {
         if (!(e.getEntity() instanceof Player)) return;
 
-        if (e.getCause() == EntityDamageEvent.DamageCause.VOID) return;
+        if (e.getCause() == EntityDamageEvent.DamageCause.VOID
+        || e.getCause() == EntityDamageEvent.DamageCause.FALL
+        || e.getCause() == EntityDamageEvent.DamageCause.HOT_FLOOR) return;
 
         e.setCancelled(isProtectedChunk(e.getEntity().getLocation().getChunk()));
     }

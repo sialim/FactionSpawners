@@ -3,7 +3,7 @@ package com.bermei.factionspawners.events;
 import com.bermei.factionspawners.FactionSpawners;
 import com.bermei.factionspawners.factions.Faction;
 import com.bermei.factionspawners.gui.InviteResponseGUI;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,12 +37,13 @@ public class ClickGUI implements Listener {
                     faction1.addMember(p.getUniqueId());
                     plugin.invites.removeInvite(p.getUniqueId(), faction);
                     p.closeInventory();
-                    plugin.util.actionBar(p, "Joined " + faction);
+                    plugin.util.actionBar(p, "joined " + faction, ChatColor.GREEN);
                 }
             }
 
             if (clicked.getItemMeta().getDisplayName().equals("delete")) {
                 plugin.invites.removeInvite(p.getUniqueId(), faction);
+                plugin.util.actionBar(p, "deleted invite from " + faction);
                 p.closeInventory();
             }
         }

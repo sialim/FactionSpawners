@@ -4,4 +4,3 @@ main: com.bermei.factionspawners.FactionSpawners
 commands:
   f:
     description: Faction command
-    usage: /f <subcommand>
