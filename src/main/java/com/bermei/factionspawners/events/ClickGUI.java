@@ -56,6 +56,8 @@ public class ClickGUI implements Listener {
                 plugin.util.actionBar(p, "deleted invite from " + faction);
                 p.closeInventory();
             }
+        } else if (title.startsWith("faction members -")) {
+            e.setCancelled(true);
         }
     }
 }
