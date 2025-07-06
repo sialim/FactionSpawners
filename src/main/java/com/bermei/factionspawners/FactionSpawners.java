@@ -3,6 +3,7 @@ package com.bermei.factionspawners;
 import com.bermei.factionspawners.commands.FactionCommand;
 import com.bermei.factionspawners.events.ChatToSignListener;
 import com.bermei.factionspawners.events.ClickGUI;
+import com.bermei.factionspawners.events.JoinMessageModifier;
 import com.bermei.factionspawners.events.ProtectionListener;
 import com.bermei.factionspawners.factions.FactionManager;
 import com.bermei.factionspawners.utilities.ActionBarMessages;
@@ -18,6 +19,7 @@ public final class FactionSpawners extends JavaPlugin {
     public InviteStorage invites;
     public ClickGUI clickListener;
     public ProtectionListener protectionListener;
+    public JoinMessageModifier joinMessageModifier;
 
     @Override
     public void onEnable() {
@@ -28,6 +30,7 @@ public final class FactionSpawners extends JavaPlugin {
         factionCommand = new FactionCommand(this);
         clickListener = new ClickGUI(this);
         protectionListener = new ProtectionListener();
+        joinMessageModifier = new JoinMessageModifier(this);
 
         getCommand("f").setExecutor(factionCommand);
         getCommand("f").setTabCompleter(factionCommand);
@@ -35,6 +38,7 @@ public final class FactionSpawners extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(signChat, this);
         Bukkit.getPluginManager().registerEvents(clickListener, this);
         Bukkit.getPluginManager().registerEvents(protectionListener, this);
+        Bukkit.getPluginManager().registerEvents(joinMessageModifier, this);
 
         saveDefaultConfig();
     }
