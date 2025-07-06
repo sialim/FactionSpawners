@@ -50,6 +50,7 @@ public class FactionCreateCommand implements SubCommand {
 
         Faction faction = new Faction(name, p.getUniqueId());
         commandManager.factionManager.addFaction(faction);
+        commandManager.factionManager.saveFactions();
         util.actionBar(p, "faction " + name + " created", ChatColor.GREEN);
     }
 

@@ -38,7 +38,12 @@ public class FactionInviteCommand implements SubCommand {
         }
 
         Faction faction = commandManager.factionManager.getFactionByMember(p.getUniqueId());
-        if (faction == null || !faction.isAdmin(p.getUniqueId())) {
+        if (faction == null) {
+            util.actionBar(p, "not in faction", ChatColor.RED);
+            return;
+        }
+
+        if (!faction.isAdmin(p.getUniqueId())) {
             util.actionBar(p, "insufficient permission", ChatColor.RED);
             return;
         }
