@@ -102,6 +102,11 @@ public class FactionManager {
         return null;
     }
 
+    public void removeFaction(String name) {
+        factions.remove(name);
+        saveFactions();
+    }
+
     public Collection<Faction> getAllFactions() {
         return factions.values();
     }

@@ -18,7 +18,7 @@ public class FactionCommand implements TabExecutor {
         registerSubCommand(new FactionCreateCommand(this));
         registerSubCommand(new FactionInviteCommand(this));
         registerSubCommand(new FactionInvitesCommand(this));
-        //registerSubCommand(new FactionDeleteCommand());
+        registerSubCommand(new FactionDeleteCommand(this));
         //registerSubCommand(new FactionRemoveCommand());
         //registerSubCommand(new FactionAdminCommand());
         //registerSubCommand(new FactionUnadminCommand());
