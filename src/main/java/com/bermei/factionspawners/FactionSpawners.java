@@ -31,7 +31,7 @@ public final class FactionSpawners extends JavaPlugin {
         util = new ActionBarMessages();
         factionCommand = new FactionCommand(this);
         clickListener = new ClickGUI(this);
-        protectionListener = new ProtectionListener();
+        protectionListener = new ProtectionListener(this);
         joinMessageModifier = new JoinMessageModifier(this);
         spawnerManager = new SpawnerManager(this);
 

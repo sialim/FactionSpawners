@@ -9,11 +9,13 @@ import java.util.*;
 public class FactionManager {
     private FactionSpawners plugin;
     private final Map<String, Faction> factions;
+    private final Map<String, Boolean> factionPvPStatus;
     private final File file;
 
     public FactionManager(FactionSpawners plugin) {
         this.plugin = plugin;
         factions = new HashMap<>();
+        factionPvPStatus = new HashMap<>();
 
         File folder = new File(plugin.getDataFolder(), "");
         if(!folder.exists()) folder.mkdirs();
@@ -105,6 +107,14 @@ public class FactionManager {
     public void removeFaction(String name) {
         factions.remove(name);
         saveFactions();
+    }
+
+    public boolean isFactionPvPEnabled(String factionName) {
+        return factionPvPStatus.getOrDefault(factionName, true);
+    }
+
+    public void setFactionPvP(String factionName, boolean enabled) {
+        factionPvPStatus.put(factionName, enabled);
     }
 
     public Collection<Faction> getAllFactions() {
