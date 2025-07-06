@@ -64,6 +64,7 @@ public class FactionRemoveCommand implements SubCommand{
 
         else if (tUUID.equals(faction.owner)) {
             util.actionBar(p, "cannot remove faction owner", ChatColor.RED);
+            return;
         }
 
         faction.removeMember(tUUID);
