@@ -44,7 +44,17 @@ public class FactionCreateCommand implements SubCommand {
         }
 
         String name = args[0];
-        if (commandManager.factionManager.getFaction(name) != null) {
+        if (!name.matches("^[a-zA-Z0-9]+$")) {
+            util.actionBar(p, "faction name must be alphanumeric only", ChatColor.RED);
+            return;
+        }
+
+        else if (name.length() > 14) {
+            util.actionBar(p, "faction name too long (>14)", ChatColor.RED);
+            return;
+        }
+
+        else if (commandManager.factionManager.getFaction(name) != null) {
             util.actionBar(p, "faction already exists", ChatColor.RED);
             return;
         }
