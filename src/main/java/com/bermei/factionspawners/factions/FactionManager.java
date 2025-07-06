@@ -14,7 +14,11 @@ public class FactionManager {
     public FactionManager(FactionSpawners plugin) {
         this.plugin = plugin;
         factions = new HashMap<>();
-        file = new File(plugin.getDataFolder(), "factions.txt");
+
+        File folder = new File(plugin.getDataFolder(), "");
+        if(!folder.exists()) folder.mkdirs();
+
+        file = new File(folder, "factions.txt");
 
         if (file.exists()) {
             loadFactions();
