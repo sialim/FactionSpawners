@@ -33,7 +33,7 @@ public class FactionRemoveCommand implements SubCommand{
         Player p = (Player) sender;
 
         if (args.length != 1) {
-            util.actionBar(p, "/f invite <player>");
+            util.actionBar(p, "/f remove <player>");
             return;
         }
 
