@@ -43,7 +43,7 @@ public class FactionCreateCommand implements SubCommand {
             return;
         }
 
-        String name = args[0];
+        String name = args[0].trim();
         if (!name.matches("^[a-zA-Z0-9]+$")) {
             util.actionBar(p, "faction name must be alphanumeric only", ChatColor.RED);
             return;

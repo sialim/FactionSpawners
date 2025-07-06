@@ -73,6 +73,14 @@ public class FactionRemoveCommand implements SubCommand{
             return;
         }
 
+        boolean senderIsOwner = pUUID.equals(faction.owner);
+        boolean targetIsAdmin = faction.isAdmin(tUUID);
+
+        if (!senderIsOwner && targetIsAdmin) {
+            util.actionBar(p, "faction admins cannot remove other admins", ChatColor.RED);
+            return;
+        }
+
         faction.removeMember(tUUID);
         commandManager.factionManager.saveFactions();
         faction.members.stream()

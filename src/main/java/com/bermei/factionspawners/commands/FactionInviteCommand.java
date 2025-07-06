@@ -59,6 +59,10 @@ public class FactionInviteCommand implements SubCommand {
             util.actionBar(p, "player already in faction", ChatColor.RED);
             return;
         }
+        else if (commandManager.factionManager.getFactionByMember(tUUID) != null) {
+            util.actionBar(p, "player already in other faction", ChatColor.RED);
+            return;
+        }
 
         commandManager.plugin.invites.addInvite(tUUID, faction.name);
         util.actionBar(p, "invite sent to " + t.getName(), ChatColor.GREEN);
